@@ -1,0 +1,38 @@
+<div id="jumbo1" class="jumbotron">
+  <!-- <img src="assets/Capture.PNG" class="rounded-circle" height="25" width="25">
+    <h2>Schluffer</h2>
+    <p>Don't worry just schluff It off</p> -->
+
+  Type of Job: <select [(ngModel)]="jobs.type">
+    <option value="Household">Household</option>
+    <option value="Automotive">Automotive</option>
+    <option value="Pets">Pets</option>
+    <option value="Errands">Errands</option>
+    <option value="Labor">Labor</option>
+    <option value="Technical">Technical</option>
+    <option value="Rideshare">Rideshare</option>
+
+
+
+  </select>
+  <br> <br> Description of Job: <input type="text" [(ngModel)]="jobs.description">
+
+  <br><br> Price of Job:
+  <!-- <input type="number" [(ngModel)]="jobs.price" required [min]="1"> -->
+  <select [(ngModel)]="jobs.price">
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="40">40</option>
+    <option value="50">50</option>
+  </select>
+  <br>
+  <button (click)="addJobs()"><fa id="fa1" name="save"></fa></button>
+  <br>
+  <br>
+  <a class="" routerLink="/jobslist">See all of my added jobs</a>
+</div>
+<!-- <div id="jumbo2" class="jumbotron">
+  <input name="term" type="search" placeholder="type in key word to search" aria-label="Search" [(ngModel)]="term">
+</div> -->
+
+<!-- <app-jobslist></app-jobslist> -->

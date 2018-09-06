@@ -1,0 +1,105 @@
+<!-- <input class="form-control mr-sm-2" name="term" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="term"> -->
+<!-- <div id="jumbo2" class="jumbotron"> </div>-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    table,
+    td,
+    th {
+      border: 1px solid black;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: lightsteelblue;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="jumbo2" class="jumbotron">
+    <input name="term" type="search" placeholder="type keyword to search" aria-label="Search" [(ngModel)]="term">
+    <table>
+      <tr>
+        <th>Job Category</th>
+        <th>Job Description</th>
+        <th>Job Price</th>
+        <th>Job Id</th>
+        <th>Username</th>
+        <th>Add/Delete/Message</th>
+        <!-- <th>Country</th> -->
+      </tr>
+      <tr *ngFor="let jobs  of jobsList | filter: term">
+        <td>{{jobs.type}}</td>
+        <td>{{jobs.description}}</td>
+        <td>{{jobs.price}}</td>
+        <td>{{jobs.id}}</td>
+        <td>googleuser</td>
+
+        <td>
+          <a routerLink="jobslist/{{jobs.id}}" class="btn btn-secondary btn-sm">
+            <button (click)="deleteJobs(jobs.id)">
+              <fa id="fa2" name="trash" animation=""></fa>
+            </button></a>
+          <button> <fa id="fa3" name="envelope-square" animation="" class="btn btn-secondary btn-sm"></fa>
+          </button>
+        </td>
+      </tr>
+
+
+    </table>
+
+    <div *ngFor="let jobs of jobsList | filter: term">
+      <!-- {{jobs.id}}: {{jobs.type}} : {{jobs.description}} : {{jobs.price}} -->
+      <!-- <button (click)="deleteJobs(jobs.id)">
+        <fa id="fa2" name="trash" animation="spin"></fa>
+      </button> -->
+    </div>
+  </div>
+</body>
+
+</html>
+
+<!-- <table>
+    <tr>
+      <th>Job Category</th>
+      <th>Job Description</th>
+      <th>Job Price</th>
+      <th>Job Id</th>
+      <th>Country</th>
+    </tr>
+    <tr *ngFor="let jobs  of jobsList">
+      <td>{{jobs.type}}</td>
+      <td>{{jobs.description}}</td>
+      <td>{{jobs.price}}</td>
+      <td>{{jobs.id}}</td>
+
+      <td>
+        <a routerLink="jobslist/{{jobs.id}}" class="btn btn-secondary btn-sm">
+          <button (click)="deleteJobs(jobs.id)">
+            <fa id="fa2" name="trash" animation=""></fa>
+          </button></a>
+      </td>
+    </tr>
+
+
+  </table>
+
+ 
+<!-- <input name="term" type="search" placeholder="type in key word to search" aria-label="Search" [(ngModel)]="term">
+
+
+<div *ngFor="let jobs of jobsList | filter: term">
+  {{jobs.id}}: {{jobs.type}} : {{jobs.description}} : {{jobs.price}}
+  <button (click)="deleteJobs(jobs.id)"><fa id="fa2" name="trash" animation="spin"></fa></button>
+</div> -->

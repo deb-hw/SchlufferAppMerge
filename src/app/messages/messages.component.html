@@ -1,0 +1,68 @@
+<div class="container">
+    <input id="usernameInput" readonly="readonly" [(ngModel)]="currentProfile.username">'s Messages:
+    <ul class="nav nav-tabs">
+        <li [ngClass]="{'active': activeTab == 'inbox'}">
+            <a (click)="activeTab='inbox'"><button type="button" class="btn btn-info">Inbox</button>
+            </a>
+        </li>
+        <br>
+        <li [ngClass]="{'active': activeTab == 'sent'}">
+            <a (click)="activeTab='sent'"><button type="button" class="btn btn-warning">Sent</button>
+            </a>
+        </li>
+    </ul>
+    <table *ngIf="activeTab=='inbox'" class="table table-bordered table-condensed">
+        <tbody>
+            <tr *ngFor="let message of messages" (click)="showPopup(message,content)">
+                <td>{{ message.from }}</td>
+                <td>{{ message.subject }}</td>
+                <td>{{ message.date }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table *ngIf="activeTab=='sent'" class="table table-bordered table-condensed">
+        <tbody>
+            <tr *ngFor="let message of sentMessages" (click)="showPopup(message,content)">
+                <td>{{ message.to }}</td>
+                <td>{{ message.subject }}</td>
+                <td>{{ message.date | date:'MMM d' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" (click)="showComposePopup(compose)">Compose</button>
+    <!-- {{isPopupVisible}} -->
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="closePopup()">&times;</button>
+            <h3>{{selectedMessage.subject}}</h3>
+        </div>
+        <div class="modal-body">
+            <strong>From:</strong> {{selectedMessage.from}}<br />
+            <strong>To:</strong> {{selectedMessage.to}}<br />
+            <strong>Date:</strong> {{selectedMessage.date | date:'MMM d' }}<br />
+            <br /> {{selectedMessage.body}}
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn">Forward</a>
+            <a href="#" class="btn">Reply</a>
+            <button class="btn btn-primary" (click)="c('Close click')">Close</button>
+        </div>
+    </ng-template>
+    <ng-template #compose let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="closeComposePopup()">&times;</button>
+            <h3>Compose Message</h3>
+        </div>
+        <div class="modal-body">
+            <form>
+                <input type="text" placeholder="To" style="width:95%;" [(ngModel)]="composeMessage.to" name="to"><br />
+                <input type="text" placeholder="Subject" style="width:95%;" [(ngModel)]="composeMessage.subject" name="from"><br />
+                <textarea style="width:95%;" rows="10" [(ngModel)]="composeMessage.body" name="body"></textarea>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" (click)="c('Close click')">Close</button>
+            <button class="btn btn-primary" (click)="sendMessage()">Send</button>
+        </div>
+    </ng-template>
+</div>
