@@ -11,9 +11,16 @@ import { HttpClient } from "@angular/common/http";
 //   constructor() { }
 // }
 export class JobsService {
+  updateJobs(): any {
+    throw new Error("Method not implemented.");
+  }
+  jobsService: any;
+  updateJob(): any {
+    throw new Error("Method not implemented.");
+  }
   url: string = "http://localhost:8080/jobs";
 
-  jobList: Jobs[] = [];
+  jobsList: Jobs[] = [];
   searchFilter: string;
 
   getJobs(): Observable<Jobs[]> {
@@ -24,6 +31,10 @@ export class JobsService {
   }
   removeJobs(id: number) {
     this.http.delete(this.url + "/" + id).subscribe();
+  }
+  editJobs(id: number, jobs: Jobs) {
+    // this.jobsService.editJobs(id, jobs);
+    this.http.put(this.url + "/" + id, jobs).subscribe();
   }
 
   constructor(private http: HttpClient) {}

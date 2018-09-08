@@ -18,38 +18,40 @@ import { MessagesComponent } from "./messages/messages.component";
 import {
   SocialLoginModule,
   AuthServiceConfig,
-  GoogleLoginProvider
+  GoogleLoginProvider,
+  FacebookLoginProvider
 } from "angular5-social-login";
+
 import { AppService } from "./app.service";
 import { CookieService } from "ngx-cookie-service";
 import { SignupComponent } from "./user/signup/signup.component";
 import { ProfileComponent } from "./user/profile/profile.component";
-import { ToastrModule } from "ngx-toastr";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LoginComponent } from "./user/login/login.component";
 import { HeaderComponent } from "./nav/header/header.component";
-import { SocialSigninComponent } from "./user/social-signin/social-signin.component";
 import { AppMaterialModule } from "./user/app-material/app-material.module";
 import { LoginLayoutComponent } from "./user/layouts/login-layout/login-layout.component";
 import { ProfileLayoutComponent } from "./user/layouts/profile-layout/profile-layout.component";
 import { LoginSigninHeaderComponent } from "./nav/login-signin-header/login-signin-header.component";
 import { LoginSigninFooterComponent } from "./nav/login-signin-footer/login-signin-footer.component";
+import { EditComponent } from "./edit/edit.component";
+import { ToastrModule } from "ngx-toastr";
 
 export function getAuthServiceConfigs() {
-  let config = new AuthServiceConfig([
-    // {
-    //   id: FacebookLoginProvider.PROVIDER_ID,
-    //   provider: new FacebookLoginProvider("939102882940335")
-    // },
-    {
-      id: GoogleLoginProvider.PROVIDER_ID,
-      provider: new GoogleLoginProvider(
-        "727042451255-ck50cvd4bbjaum6187dksk6nacq3hj1r.apps.googleusercontent.com"
-      )
+  let config = new AuthServiceConfig(
+      [
+          // {
+          //     id: FacebookLoginProvider.PROVIDER_ID,
+          //     provider: new FacebookLoginProvider("939102882940335")
+          //   },
+            {
+              id: GoogleLoginProvider.PROVIDER_ID,
+              provider: new GoogleLoginProvider("727042451255-ck50cvd4bbjaum6187dksk6nacq3hj1r.apps.googleusercontent.com")
+            },
+          ];
+      );
+      return config;
     }
-  ]);
-  return config;
-}
 
 @NgModule({
   declarations: [
@@ -60,7 +62,6 @@ export function getAuthServiceConfigs() {
     HeaderComponent,
     FooterComponent,
     JobsListComponent,
-    SocialSigninComponent,
     LoginComponent,
     SignupComponent,
     ProfileComponent,
@@ -68,7 +69,8 @@ export function getAuthServiceConfigs() {
     ProfileLayoutComponent,
     LoginLayoutComponent,
     LoginSigninHeaderComponent,
-    LoginSigninFooterComponent
+    LoginSigninFooterComponent,
+    EditComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -83,7 +85,9 @@ export function getAuthServiceConfigs() {
     HttpClientModule,
     AngularFontAwesomeModule,
     Ng2SearchPipeModule,
-    AppMaterialModule
+    AppMaterialModule,
+    SocialLoginModule,
+    ToastrModule.forRoot()
   ],
 
   providers: [

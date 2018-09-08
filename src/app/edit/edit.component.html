@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-md-6">
+        <a routerLink="/jobslist" class="btn btn-link">
+      Back To JobsList
+    </a>
+
+    </div>
+    <!-- <div class="col-md-6">
+ 
+    </div> -->
+</div>
+
+<div class="card">
+    <div class="card-header">
+        Edit Job
+    </div>
+    <div class="card-body">
+        <!-- <form #coffeeForm="ngForm" (ngSubmit)="onSubmit(coffeeForm)"> -->
+        <div class="form-group">
+            <label for="type">Category</label>
+            <input type="text" class="form-control" name="type" [(ngModel)]="jobs.type">
+
+            <label for="price">Price</label>
+            <input type="text" class="form-control" name="price" [(ngModel)]="jobs.price">
+
+            <label for="description">Description</label>
+            <input type="text" class="form-control" name="description" [(ngModel)]="jobs.description">
+
+
+            <!-- <div [hidden]="!coffeeSource.errors?.required" class="invalid-feedback">
+          Source required
+        </div> -->
+
+
+
+
+        </div>
+
+        <!-- <div class="form-group">
+        <label for="tasteGood">TasteGood?</label>
+        <input type="checkbox" class="form-control" name="tasteGood" [(ngModel)]="coffee.tasteGood">
+ 
+        <div>
+          TasteGood required
+        </div> -->
+
+
+        <!-- </div> -->
+
+        <!-- <a routerLink="coffee/{{coffee.id}}" class="btn btn-secondary btn-sm"> -->
+
+        <button (click)="editJobs(jobs.id, jobs)">Edit
+      <i class="fa fa-arrow-circle-o-right"></i>
+    </button>
+
+        <!-- </a> -->
+
+
+
+        <!-- <input type="submit" value="Submit" class="btn btn-primary btn-block"> -->
+        <!-- </form> -->
+    </div>
+</div>

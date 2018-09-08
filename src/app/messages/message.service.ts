@@ -23,3 +23,7 @@ export class MessageService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 }
+// I received this error message: Response to preflight request doesn't pass access control check.
+// related to CORS
+// I added this to my browser (https://chrome.google.com/webstore/detail/allow-control-allow-origi)
+// Now Getting following Error: Response for preflight has invalid HTTP status code 403.

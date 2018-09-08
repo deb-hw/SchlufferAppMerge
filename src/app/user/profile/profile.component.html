@@ -3,7 +3,7 @@
     </h1>
 </div>
 <div id="bottom">
-    <button class="logout" mat-button (click)="onLogout()" *ngIf="isLoggedIn"><label>Log Out</label></button>
+    <button class="logout" mat-button (click)="onLogout() && socialSignOut('google')" *ngIf="isLoggedIn"><label>Log Out</label></button>
     <ul class="social">
         <!-- Adding a User Profile Picture -->
         <!-- <div class="avatar"> -->

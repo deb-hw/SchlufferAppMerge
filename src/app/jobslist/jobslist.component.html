@@ -51,13 +51,22 @@
             <button (click)="deleteJobs(jobs.id)">
               <fa id="fa2" name="trash" animation=""></fa>
             </button></a>
-          <button> <fa id="fa3" name="envelope-square" animation="" class="btn btn-secondary btn-sm"></fa>
-          </button>
+          <a class="" routerLink="/messages"><button> <fa id="fa3" name="envelope-square" animation="" class="btn btn-secondary btn-sm"></fa>
+            </button></a>
+          <a class="" routerLink="/edit"><button class="w3-btn w3-ripple">Edit</button></a>
         </td>
       </tr>
 
 
     </table>
+    <!-- <script type="text/ng-template" id="view">
+      <td>{{jobs.type}}</td>
+      <td>{{jobs.description}}</td>
+      <td>{{jobs.price}}</td>
+      <td>{{jobs.id}}</td>
+      <td>
+        <button ng-click="updateJob(job)">Edit</button>
+      </td> -->
 
     <div *ngFor="let jobs of jobsList | filter: term">
       <!-- {{jobs.id}}: {{jobs.type}} : {{jobs.description}} : {{jobs.price}} -->

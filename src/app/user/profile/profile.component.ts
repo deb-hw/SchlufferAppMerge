@@ -55,6 +55,7 @@ export class ProfileComponent implements OnInit {
   onLogout() {
     localStorage.removeItem("userId");
     this.socketService.logOut();
+    this.toastr.error("You Are Logged Out!");
     this._route.navigate(["login"]);
   }
 }

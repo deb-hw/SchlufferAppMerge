@@ -11,6 +11,7 @@ import { ProfileComponent } from "./user/profile/profile.component";
 import { AuthorizationGuard } from "./user/authorization/authorization.guard";
 import { LoginLayoutComponent } from "./user/layouts/login-layout/login-layout.component";
 import { ProfileLayoutComponent } from "./user/layouts/profile-layout/profile-layout.component";
+import { EditComponent } from "./edit/edit.component";
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
     canActivate: [AuthorizationGuard],
     children: [
       { path: "profile", component: ProfileComponent },
-
+      { path: "edit", component: EditComponent },
       { path: "jobs", component: JobsComponent },
       { path: "jobslist", component: JobsListComponent },
       { path: "messages", component: MessagesComponent }

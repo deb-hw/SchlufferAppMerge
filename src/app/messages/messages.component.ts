@@ -10,6 +10,9 @@ import { CookieService } from "ngx-cookie-service";
 
 @Component({
   selector: "app-messages",
+  template: `
+  <app-alerts></app-alerts>
+  `,
   templateUrl: "./messages.component.html",
   styleUrls: ["./messages.component.css"]
 })
@@ -25,15 +28,6 @@ export class MessagesComponent implements OnInit {
   public userInfo: any;
   public userId: any;
   public disconnectedSocket: boolean;
-
-  sendMessage = function() {
-    this.composeMessage.toId = this.currentProfile.userId;
-    this.isComposePopupVisible = false;
-    this.composeMessage.from = this.author;
-    this.composeMessage.to = this.toUser;
-    this.composeMessage.date = new Date();
-    this.sentMessages.push(this.composeMessage);
-  };
 
   showComposePopup = function(compose) {
     this.composeMessage = {};
@@ -55,6 +49,27 @@ export class MessagesComponent implements OnInit {
   closePopup = function() {
     console.log("closing popup");
     this.isPopupVisible = false; // not sure if necessary anymore
+  };
+
+  sendMessage = function() {
+    console.log(this.composeMessage);
+    this.messageService.addMessage(this.composeMessage).subscribe(data => {
+      console.log(data);
+      localStorage.setItem("id", data.id);
+      this.composeMessage.toId = this.currentProfile.userId;
+      this.isComposePopupVisible = false;
+      this.composeMessage.from = this.author;
+      this.composeMessage.to = this.toUser;
+      this.composeMessage.date = new Date();
+    });
+    if (this.composeMessage.sent) {
+      this.sentMessages.push(this.composeMessage);
+      this.sentMessages = true;
+      this.toastr.error("Sign In Not Successful");
+    } else {
+      this.sentMessages = false || null;
+      this.toastr.error("Sign In Not Successful");
+    }
   };
 
   messages = [
@@ -100,6 +115,7 @@ export class MessagesComponent implements OnInit {
       // this.profilePic = p.image;
     });
   }
+
   ngOnInit() {
     this.userId = localStorage.getItem("userId");
     this.getProfile();

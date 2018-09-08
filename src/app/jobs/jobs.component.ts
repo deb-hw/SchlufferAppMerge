@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { JobsService } from "./jobs.service";
 import { Jobs } from "./jobs";
+import { JobsService } from "./jobs.service";
 
 @Component({
   selector: "app-jobs",
@@ -19,11 +19,14 @@ export class JobsComponent implements OnInit {
   jobs: Jobs = new Jobs();
 
   addJobs() {
-    this.jobsServiceService.addJobs(this.jobs);
+    this.jobsService.addJobs(this.jobs);
     this.jobs = new Jobs();
   }
+  updateJobs(): void {
+    this.jobsService.updateJobs().subscribe(data => (this.jobs = data));
+  }
 
-  constructor(private jobsServiceService: JobsService) {}
+  constructor(private jobsService: JobsService) {}
 
   ngOnInit() {}
 }
