@@ -17,8 +17,8 @@ export class MessageService {
     return this.http.get<Message>(this.baseUrl + "/" + toUser);
   }
 
-  addMessage(messages: Message, author: string) {
-    return this.http.post(this.baseUrl, this.message);
+  addMessage(message: Message, author: string) {
+    return this.http.post(this.baseUrl + "/send", message);
   }
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}

@@ -1,4 +1,4 @@
-export interface Message {
+export class Message {
   id: number;
   subject: string;
   message: string;

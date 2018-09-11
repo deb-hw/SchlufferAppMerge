@@ -7,6 +7,7 @@ import { MessageService } from "./message.service";
 import { AppService } from "../app.service";
 import { User } from "../user/user";
 import { CookieService } from "ngx-cookie-service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-messages",
@@ -19,7 +20,7 @@ import { CookieService } from "ngx-cookie-service";
 export class MessagesComponent implements OnInit {
   public isPopupVisible = false;
   public isComposePopupVisible = false;
-  public composeMessage = {};
+  public composeMessage = new Message();
   public activeTab = "inbox";
   public sentMessages = [];
   showFile = false;
@@ -30,7 +31,7 @@ export class MessagesComponent implements OnInit {
   public disconnectedSocket: boolean;
 
   showComposePopup = function(compose) {
-    this.composeMessage = {};
+    this.composeMessage = new Message();
     this.isComposePopupVisible = true; // Not sure if necessary anymore
     this.modalService.open(compose, { centered: true });
   };
@@ -48,71 +49,51 @@ export class MessagesComponent implements OnInit {
 
   closePopup = function() {
     console.log("closing popup");
-    this.isPopupVisible = false; // not sure if necessary anymore
+    this.isPopupVisible = false;
   };
 
-  sendMessage = function() {
-    console.log(this.composeMessage);
-    this.messageService.addMessage(this.composeMessage).subscribe(data => {
-      console.log(data);
-      localStorage.setItem("id", data.id);
-      this.composeMessage.toId = this.currentProfile.userId;
-      this.isComposePopupVisible = false;
-      this.composeMessage.from = this.author;
-      this.composeMessage.to = this.toUser;
-      this.composeMessage.date = new Date();
-    });
-    if (this.composeMessage.sent) {
-      this.sentMessages.push(this.composeMessage);
-      this.sentMessages = true;
-      this.toastr.error("Sign In Not Successful");
-    } else {
-      this.sentMessages = false || null;
-      this.toastr.error("Sign In Not Successful");
-    }
-  };
+  messages = this.sentMessages;
 
-  messages = [
-    {
-      from: "Jason",
-      to: "me",
-      subject: "Hello World!",
-      date: "Sept 1",
-      body: "I love Angular! I wonder if it loves me back?"
-    },
-    {
-      from: "Angela",
-      to: "me",
-      subject: "Yeah, I don't know about Angular.",
-      date: "Sept 3",
-      body:
-        "Angular and I are just friends! Hmm, but I don't mind getting to know it."
-    },
-    {
-      from: "Mio",
-      to: "me",
-      subject: "Wassup? ",
-      date: "Aug 28",
-      body: "What about Java? Now that's for me!"
-    }
-  ];
+  // messages = [
+  //   {
+  //     author: "Jason",
+  //     toUser: "me",
+  //     subject: "Hello World!",
+  //     date: "Sept 1",
+  //     message: "I love Angular! I wonder if it loves me back?"
+  //   },
+  //   {
+  //     author: "Angela",
+  //     toUser: "me",
+  //     subject: "Yeah, I don't know about Angular.",
+  //     date: "Sept 3",
+  //     message:
+  //       "Angular and I are just friends! Hmm, but I don't mind getting to know it."
+  //   },
+  //   {
+  //     author: "Mio",
+  //     toUser: "me",
+  //     subject: "Wassup? ",
+  //     date: "Aug 28",
+  //     message: "What about Java? Now that's for me!"
+  //   }
+  // ];
   constructor(
     private messageService: MessageService,
     private appService: AppService,
     private socketService: SocketService,
     private cookieService: CookieService,
     private modalService: NgbModal,
-    private _route: Router
+    private _route: Router,
+    private toastr: ToastrService
   ) {}
 
   profile: User;
-  // // profilePic: string;
 
   getProfile() {
     this.socketService.getProfile(this.userId).subscribe(p => {
       this.profile = p;
       this.currentProfile = p;
-      // this.profilePic = p.image;
     });
   }
 
@@ -120,4 +101,24 @@ export class MessagesComponent implements OnInit {
     this.userId = localStorage.getItem("userId");
     this.getProfile();
   }
+
+  sendMessage = function() {
+    this.composeMessage.toId = this.currentProfile.userId;
+    this.composeMessage.date = new Date();
+    this.composeMessage.toUser;
+    this.composeMessage.author;
+    console.log(this.composeMessage);
+    this.messageService.addMessage(this.composeMessage).subscribe(data => {
+      this.composeMessage.toId = this.currentProfile.userId;
+      this.isComposePopupVisible = false;
+    });
+    if (this.composeMessage) {
+      this.sentMessages.push(this.composeMessage);
+      this.toastr.success("Message Send Successful!");
+      // this.sentMessages.push(this.messages); // added 09102018
+    } else {
+      this.sentMessages = false || null;
+      this.toastr.error("Message Send Not Successful!");
+    }
+  };
 }

@@ -38,20 +38,20 @@ import { EditComponent } from "./edit/edit.component";
 import { ToastrModule } from "ngx-toastr";
 
 export function getAuthServiceConfigs() {
-  let config = new AuthServiceConfig(
-      [
-          // {
-          //     id: FacebookLoginProvider.PROVIDER_ID,
-          //     provider: new FacebookLoginProvider("939102882940335")
-          //   },
-            {
-              id: GoogleLoginProvider.PROVIDER_ID,
-              provider: new GoogleLoginProvider("727042451255-ck50cvd4bbjaum6187dksk6nacq3hj1r.apps.googleusercontent.com")
-            },
-          ];
-      );
-      return config;
+  let config = new AuthServiceConfig([
+    // {
+    //     id: FacebookLoginProvider.PROVIDER_ID,
+    //     provider: new FacebookLoginProvider("939102882940335")
+    //   },
+    {
+      id: GoogleLoginProvider.PROVIDER_ID,
+      provider: new GoogleLoginProvider(
+        "727042451255-ck50cvd4bbjaum6187dksk6nacq3hj1r.apps.googleusercontent.com"
+      )
     }
+  ]);
+  return config;
+}
 
 @NgModule({
   declarations: [

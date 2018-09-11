@@ -1,5 +1,5 @@
+<input id="username" readonly="readonly" [(ngModel)]="currentProfile.username">'s Messages:
 <div class="container">
-    <input id="usernameInput" readonly="readonly" [(ngModel)]="currentProfile.username">'s Messages:
     <ul class="nav nav-tabs">
         <li [ngClass]="{'active': activeTab == 'inbox'}">
             <a (click)="activeTab='inbox'"><button type="button" class="btn btn-info">Inbox</button>
@@ -14,16 +14,16 @@
     <table *ngIf="activeTab=='inbox'" class="table table-bordered table-condensed">
         <tbody>
             <tr *ngFor="let message of messages" (click)="showPopup(message,content)">
-                <td>{{ message.from }}</td>
+                <td>{{ message.author }}</td>
                 <td>{{ message.subject }}</td>
-                <td>{{ message.date }}</td>
+                <td>{{ message.date | date:'MMM d' }}</td>
             </tr>
         </tbody>
     </table>
     <table *ngIf="activeTab=='sent'" class="table table-bordered table-condensed">
         <tbody>
             <tr *ngFor="let message of sentMessages" (click)="showPopup(message,content)">
-                <td>{{ message.to }}</td>
+                <td>{{ message.toUser }}</td>
                 <td>{{ message.subject }}</td>
                 <td>{{ message.date | date:'MMM d' }}</td>
             </tr>
@@ -37,10 +37,10 @@
             <h3>{{selectedMessage.subject}}</h3>
         </div>
         <div class="modal-body">
-            <strong>From:</strong> {{selectedMessage.from}}<br />
-            <strong>To:</strong> {{selectedMessage.to}}<br />
+            <strong>From:</strong> {{selectedMessage.author}}<br />
+            <strong>To:</strong> {{selectedMessage.toUser}}<br />
             <strong>Date:</strong> {{selectedMessage.date | date:'MMM d' }}<br />
-            <br /> {{selectedMessage.body}}
+            <br /> {{selectedMessage.message}}
         </div>
         <div class="modal-footer">
             <a href="#" class="btn">Forward</a>
@@ -55,15 +55,17 @@
         </div>
         <div class="modal-body">
             <form>
-                <input type="text" placeholder="To" style="width:95%;" [(ngModel)]="composeMessage.to" name="to"><br />
-                <input type="text" placeholder="Subject" style="width:95%;" [(ngModel)]="composeMessage.subject" name="from"><br />
-                <textarea style="width:95%;" rows="10" [(ngModel)]="composeMessage.body" name="body"></textarea>
+                <input id="compose1" placeholder="From" readonly="readonly" [(ngModel)]="currentProfile.username  || composeMessage.author" name="from">
+                <input id="compose2" type="text" placeholder="To" style="width:95%;" [(ngModel)]="composeMessage.toUser" name="to"><br />
+                <input id="compose3" type="text" placeholder="Subject" style="width:95%;" [(ngModel)]="composeMessage.subject" name="subject"><br />
+                <textarea style="width:95%;" rows="10" [(ngModel)]="composeMessage.message" name="message"></textarea>
             </form>
         </div>
         <div class="modal-footer">
             <button class="btn" (click)="c('Close click')">Close</button>
-            <button class="btn btn-primary" (click)="sendMessage()">Send</button>
+            <button class="btn btn-primary" (click)="sendMessage() || c('Close click')">Send</button>
         </div>
+
     </ng-template>
 </div>
 <br>

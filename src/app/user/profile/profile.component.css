@@ -34,6 +34,7 @@ h1 {
 }
 
 input {
+    text-transform: uppercase;
     padding-top: 1vmin;
     text-align: center;
     font-size: 3.5vw;
