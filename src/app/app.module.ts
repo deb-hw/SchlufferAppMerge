@@ -36,6 +36,8 @@ import { LoginSigninHeaderComponent } from "./nav/login-signin-header/login-sign
 import { LoginSigninFooterComponent } from "./nav/login-signin-footer/login-signin-footer.component";
 import { EditComponent } from "./edit/edit.component";
 import { ToastrModule } from "ngx-toastr";
+import { AvatarModule } from "ng2-avatar";
+// import { AvatarSubstringService } from "./avatar-substring.service";
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig([
@@ -87,7 +89,8 @@ export function getAuthServiceConfigs() {
     Ng2SearchPipeModule,
     AppMaterialModule,
     SocialLoginModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AvatarModule.forRoot()
   ],
 
   providers: [

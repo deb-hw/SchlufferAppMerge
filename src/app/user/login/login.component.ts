@@ -13,6 +13,7 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from "angular5-social-login";
+import { AvatarModule } from "ng2-avatar";
 
 @Component({
   selector: "app-login",
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
   socialPlatformProvider;
   userId;
   data;
+  avatar;
 
   constructor(
     private fb: FormBuilder,
@@ -62,8 +64,8 @@ export class LoginComponent implements OnInit {
     this.socialAuthservice
       .signIn(this.socialPlatformProvider)
       .then(userData => {
+        this._route.navigate(["/profile"]);
         console.log(socialPlatform + "sign in data : ", userData);
-        this._route.navigate(["profile"]);
         this.toastr.success("Sign In Successful");
       });
   }

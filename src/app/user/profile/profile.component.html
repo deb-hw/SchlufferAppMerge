@@ -4,25 +4,19 @@
 </div>
 <div id="bottom">
     <button class="logout" mat-button (click)="onLogout() && socialSignOut('google')" *ngIf="isLoggedIn"><label>Log Out</label></button>
-    <ul class="social">
-        <!-- Adding a User Profile Picture -->
-        <!-- <div class="avatar"> -->
-        <!-- <img [src]="profilePic" *ngIf="profilePic"> -->
-        <!-- </div> -->
-        <!-- Temporary Image Source Profile Picture Below -->
-        <img src="https://static1.squarespace.com/static/58da61243a0411e118c534d9/5ab7ed2e88251b198c3e5d48/5ab7ed2e03ce64c499d195db/1522003251202/Bear.png">
+    <ul class="social d-flex flex-column align-items-center">
+        <!-- <img src="https://static1.squarespace.com/static/58da61243a0411e118c534d9/5ab7ed2e88251b198c3e5d48/5ab7ed2e03ce64c499d195db/1522003251202/Bear.png"> -->
+        <br>
         <br>
         <h1>
             <span><input id="usernameInput" readonly="readonly" [(ngModel)]="currentProfile.username"></span>
         </h1>
-        <li class="google">
-            <a href="https://plus.google.com"><label class="entypo-gplus"></label></a>
-        </li>
-
-        <!--Probably will not use this object!-->
+        <avatar [email]="firstLetter" [displayType]="'circle'"></avatar>
+    </ul>
+    <br>
+    <ul centered>
         <li class="messaging">
             <a [routerLink]="['/messages']"><label class="entypo-mixi"></label></a>
         </li>
     </ul>
-
 </div>
